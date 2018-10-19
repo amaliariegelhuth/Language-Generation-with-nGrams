@@ -45,10 +45,9 @@ When Shannon proposed this algorithm, it had to be done by hand because the firs
 
 > To construct [degree=1 language] for example, one opens a book at random and selects a letter at random on the page. This letter is recorded. The book is then opened to another page and one reads until this letter is encountered. The succeeding letter is then recorded. Turning to another page this second letter is searched for and the succeeding letter recorded, etc.... It would be interesting if further approximations [of higher degree] could be constructed, but the labor involved becomes enormous at the next stage.
 
+### Your task
+
 Shannon balked at the idea of high order models, but fortunately for you, today's computers are capable of building a language model, even of a high order.
-
-
-## Your task
 
 You will write a Java program to implement Shannon's language generation algorithm. Both the source text and the order will be inputs to the program. Your program will be capable of generating output text from any input text using a Markov model of any order. However, you only need to test it for orders up to and including 5.
 
