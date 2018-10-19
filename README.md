@@ -51,6 +51,8 @@ Shannon balked at the idea of high order models, but fortunately for you, today'
 
 You will write a Java program to implement Shannon's language generation algorithm. Both the source text and the order will be inputs to the program. Your program will be capable of generating output text from any input text using a Markov model of any order. However, you only need to test it for orders up to and including 5.
 
+---
+
 ## Coding Overview
 
 ### Part 1: `ModelC.java` constructor: Building the language model
@@ -121,6 +123,8 @@ Repeat. The process will eventually stop because we will eventually hit a punctu
 
 + In this assignment, we built a character-level language model. Many AI applications use a word-level language model. Create a new version of `ModelC` and `LanguagGenerator` that will store a word-level language model and produce text at the word level. Note that you will need a much, much longer text to get reasonable results.
 
-## What to Submit (IMPORTANT!!!)
+---
+
+## WHAT TO SUBMIT
 
 In addition to your code, your repo should contain at least one sample input text along with sample output (.txt files) for order 1 through order 5.
