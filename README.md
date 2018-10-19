@@ -54,7 +54,7 @@ You will write a Java program to implement Shannon's language generation algorit
 ## Coding Overview
 
 ### Part 1: `ModelC.java` constructor: Building the language model
-You will write the constructor for the included `ModelC.java` class. The constructor builds the language model using an input text and a specified order (1, 2, 3, 4, or 5). The model is stored in a `HashMap` whose keys are character sequences and whose values are single character. We will store the characters as Strings, not as char or Character. Instructions for how this all should work are included in the comments of the class. There are also more details below.
+You will write the constructor for the included `ModelC.java` class. The constructor builds the language model using an input text and a specified order (1, 2, 3, 4, or 5). The model is stored in a `HashMap`. Each `Key` in the `HashMap` is a character sequence and and the `Value` for each key is an `ArrayList` of characters. We will store the characters as Strings, not as char or Character, just so we don't always have to be converting from char to String or vice versa. Instructions for how this all should work are included in the comments of the class, and there are more details below.
 
 ### Part 2: `LanguageGenerator.java` main method: Running the program and generating output
 You will write a main method in the file `LanguageGenerator.java` that will do the following:
