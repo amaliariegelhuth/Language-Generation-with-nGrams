@@ -20,7 +20,7 @@ This algorithm for building n-gram models and generating language from them was 
 ### Character n-gram language models 
 In class, we'll be talking about both word n-gram models and character n-gram models. In this problem set, we'll be focusing on character-level n-gram models. Here's an intuition of how it works:
 
-Suppose you want to generate a new text that starts with the letter `t`. How do you generate the next character? 
+Suppose you want to generate a new text that starts with the letter `'t'`. How do you generate the next character? 
 
 First, take some input text. Then, of all the occurrences of `'t'` in that input text, choose one at random. The character immediately following the `'t'` you picked will be the next character you generate. You can continue to generate characters by picking at random an example of that new character in your input text, and generating the character that follows that example of the character that you picked in the text.
 
