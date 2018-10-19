@@ -121,6 +121,6 @@ Repeat. The process will eventually stop because we will eventually hit a punctu
 
 + In this assignment, we built a character-level language model. Many AI applications use a word-level language model. Create a new version of `ModelC` and `LanguagGenerator` that will store a word-level language model and produce text at the word level. Note that you will need a much, much longer text to get reasonable results.
 
-### What to Submit (IMPORTANT!!!)
+## What to Submit (IMPORTANT!!!)
 
 In addition to your code, your repo should contain at least one sample input text along with sample output (.txt files) for order 1 through order 5.
