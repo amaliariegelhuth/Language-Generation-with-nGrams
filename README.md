@@ -56,14 +56,14 @@ You will write a Java program to implement Shannon's language generation algorit
 ## Coding Overview
 
 ### Part 1: `ModelC.java` constructor: Building the language model
-You will write the constructor for the included `ModelC.java` class. The constructor builds the language model using an input text and a specified order (1, 2, 3, 4, or 5). The model is stored in a `HashMap`. Each `Key` in the `HashMap` is a character sequence and and the `Value` for each key is an `ArrayList` of characters. We will store the characters as Strings, not as char or Character, just so we don't always have to be converting from char to String or vice versa. Instructions for how this all should work are included in the comments of the class, and there are more details below.
+You will write the constructor for the included `ModelC.java` class. The constructor builds the language model using an input text and a specified order *n* (1, 2, 3, 4, or 5). The model is stored in a `HashMap`. Each `Key` in the `HashMap` is a character sequence of up to length *n* and and the `Value` for each key is an `ArrayList` of characters. We will store the characters as `String` variables, not as `char` or `Character` variables, just so we don't always have to be converting from `char` to `String` all the time. Instructions for how this all should work are included in the comments of the class, and there are more details below.
 
 ### Part 2: `LanguageGenerator.java` main method: Running the program and generating output
 You will write a main method in the file `LanguageGenerator.java` that will do the following:
 
 1. Read from the command line two arguments:
  * args\[0\]: the name of a file to serve as the input text.
- * args\[1\]: the Markov order of the model to be build (1, 2, 3, 4, or 5)
+ * args\[1\]: the Markov order of the model to be built (1, 2, 3, 4, or 5)
 
 2. Create an instance of the `ModelC` class using the input text and order. This will be your n-gram Markov model, where n corresponds to the order supplied by the user in args\[1\]. In Part 1, you wrote the code in the constructor for the `ModelC` class that builds the model.
 
