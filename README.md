@@ -73,13 +73,13 @@ Instructions for how this all should work are included in the comments of the cl
 
 ## Implementation Guidelines
 
-Although you can implement this in many ways, I recommend using the `HashMap<Key, Value>` implementation of `java.util.Map<Key, Value>`. A map in java is very similar to a dictionary in Python or a hash in Perl. In `ModelC.java` the *keys* for the map are `String`s and the *values* are `ArrayList<String>`s:
+Although you can implement this in many ways, the code I've given you uses the `HashMap<Key, Value>` implementation of `java.util.Map<Key, Value>`. A map in java is very similar to a dictionary in Python or a hash in Perl. In `ModelC.java` the *keys* for the map are `String`s and the *values* are `ArrayList<String>`s:
 
 ```java
 HashMap<String, ArrayList<String>> map = new ArrayList<String, ArrayList<String>>();
 ```
 
- An example of such a map in Python-ish notation might be:
+ An example of such a map in Python-ish dictionary notation might be:
 
 ```java
 map = { "the" : [' ', 'n', ' ', 'r', 's'],
@@ -87,7 +87,7 @@ map = { "the" : [' ', 'n', ' ', 'r', 's'],
       }
 ```
 
-Notice that in the list associated with the string `"the"`, there are **two** spaces and the list keyed by the string `"e t"`, there are **three** `'h'`s. Spaces are characters. And the lists of characters are not unique. Thus, if the key is `'q'`, the ArrayList of values will include lots and lots of instances of `'u'`.
+Notice that in the list associated with the string `"the"`, there are **two** spaces and in the list keyed by the string `"e t"`, there are **three** `'h'`s. Spaces are characters! Note also that the lists of characters are not unique. Thus, if the key is `'q'`, the ArrayList of values will include lots and lots of instances of `'u'`.
 
 ### Implementing Part 1: Building the language Model
 
@@ -95,7 +95,7 @@ Go through the input text one character at a time. Each character is preceded by
 
 If the string isn't already a key in the map (i.e., it isn't associated with a list), then insert the string as a new key in the map. It should be associated with a new singleton list containing the current character.
 
-Note that, normally, the string of preceding characters will have exactly **n** characters, but near the front of the input text, the key string will have between 0 and **n** characters.  The string of preceding characters associated with the first character is a dummy start-of-text sequence represented by the empty string `""`. This will be the first key entered into your map.
+Normally, the string of preceding characters will have exactly **n** characters, but near the front of the input text, the key string will have between 0 and **n** characters.  The string of preceding characters associated with the first character is a dummy start-of-text sequence represented by the empty string `""`. This will be the first key entered into your map.
 
 What about at the end of the input text? We will use the dummy end-of-text sequence "$$$" as the value for the very last key in the text. 
 
@@ -103,17 +103,17 @@ More details are provided as comments in the code.
 
 ### Implementing Part 2: Sampling the language Model (5 points)
 
-Given the degree **n** and the language model created above, we can now generate the output text as follows. 
+Given the order **n** and the language model created above, we can now generate the output text as follows. 
 
-1. Maintain a `String` variable that contains the **n** most recently generated characters. (This string starts out empty since the empty string is the key that gets us started.)  
+1. Maintain a `String` variable that contains the output text generated so far. (This string starts out empty since the empty string is the key that gets us started.)  
 
-2. Look up that string in the map.  From the list of observed subsequent characters associated with that string, randomly choose an element of the list. 
+2. Look at the last **n** characters of the generated output string, which you can do using the `substring()` method on `String`. If you have fewer than **n** characters, then look at the whole string.
 
-3. The chosen list element will either be a character or the special end-of-text value `$$$`.  If the element is a character that normally ends a sentence (you can limit yourselves to `"."`, `"!"`, or `"?"`) or the special end-of-text value `$$$`, then stop generatingn and print out your result. Otherwise, append the character to the output text. 
+3. Look up that string of length **n** (or less) in the map.  From the list of observed subsequent characters associated with that string, randomly choose one. **This is called sampling, and there is a method in `ModelC.java` that does this for you**.
 
-4. Then append the character to the string of most recently generated **n** characters, making sure that the length of that string does not get larger than **n**. If the length of the string is longer than **n**, remove the first character.
+4. The chosen list element will either be a character or the special end-of-text value `$$$`.  If the element is a character that normally ends a sentence (you can limit yourselves to `"."`, `"!"`, or `"?"`) or the special end-of-text value `$$$`, then stop generating text and print out your result. Otherwise, append the chosen list element to the output text string, and go back to Step 2.
 
-Repeat. The process will eventually stop because we will eventually hit a punctuation mark that ends a sentence or "^^^".
+The process will eventually stop because we will eventually hit a punctuation mark that ends a sentence or the special emd of file sequence "^^^".
 
 ## Extra Credit (up to 5 points total, which can be used to improve another problem set)
 
