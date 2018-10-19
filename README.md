@@ -17,7 +17,7 @@ After class on Monday, you will know a bit about n-gram language modeling, which
 
 The algorithm you'll implement to build n-gram models and generate language from them was first proposed in Claude Shannon's landmark 1948 paper on information theory [A Mathematical Theory of Communication](http://cm.bell-labs.com/cm/ms/what/shannonday/shannon1948.pdf). The basic idea involves stochastic processes that were first explored by [Andrei Markov](http://en.wikipedia.org/wiki/Andrey_Markov) decades earlier.
 
-### Character n-gram Language Models 
+### Character n-gram language models 
 In class, we'll be talking about both word n-gram models and character n-gram models. In this problem set, we'll be focusing on character-level n-gram models. Here's an intuition of how it will works:
 
 Suppose you want to generate a new text that starts with the letter `t`. How do you generate the next character? 
@@ -47,26 +47,33 @@ When Shannon proposed this algorithm, it had to be done by hand because the firs
 
 Shannon balked at the idea of high degree models, but fortunately for you, today's computers are capable of building a language model, even of a high order.
 
-### Your task
+
+## Your task
 
 You will write a Java program to implement Shannon's language generation algorithm. Both the source text and the order will be inputs to the program, and so your program will be capable of generating output text from any input text using a Markov model of any degree. 
 
 ## Coding Overview
 
-The word *callback* is sometimes used to refer to a procedure that is executed in response to some asynchronous event such as the click of a button or the filling of a text field. The callbacks are executed when the button is pressed. In this problem set, you need to write the callback function `process` in the file `Shannon.java` for the button (labeled `Go`). 
+### Part 1: `ModelC.java` constructor: Building the language model
+You will write the constructor for the included `ModelC.java` class. The constructor builds the language model using an input text and a specified order (1, 2, 3, 4, or 5). The model is stored in a `HashMap` whose keys are character sequences and whose values are single character. We will store the characters as Strings, not as char or Character. Instructions for how this all should work are included in the comments of the class. There are also more details below.
 
-When the `Go` button is pressed, your `process` callback function should:
+### Part 2: `LanguageGenerator.java` main method: Running the program and generating output
+You will write a main method in the file `LanguageGenerator.java` that will do the following:
 
-1. Get the degree `this.degree`;
+1. Read from the command line two arguments:
+ * args\[0\]: the name of a file to serve as the input text.
+ * args\[1\]: the Markov order of the model to be build (1, 2, 3, 4, or 5)
 
-2. Build the Markov language model from the input text in `this.input`;
+2. Create an instance of the `ModelC` class using the input text and order. This will be your n-gram Markov model, where n corresponds to the order supplied by the user in args\[1\]. In Part 1, you wrote the code in the constructor for the `ModelC` class that builds the model.
 
-3. Generate the output text by sampling the Markov model.
+3. Generate output text by sampling the Markov model using the sample() method in the `ModelC` class.
 
-There are many ways to write this program. I recommend using the `java.util.Map<Key, Value>` type to implement a *map* relating strings to lists of characters. That is, the *keys* for the map are `String`s and the *values* are `List<Character>`s:
+## Implementation Guidelines
+
+Although you can implement this in many ways, I recommend using the `HashMap<Key, Value>` implementation of `java.util.Map<Key, Value>`. A map in java is very similar to a dictionary in Python or a hash in Perl. In `ModelC.java` the *keys* for the map are `String`s and the *values* are `ArrayList<String>`s:
 
 ```java
-Map<String, List<Character>> map = new ArrayList<String, List<Character>>();
+HashMap<String, ArrayList<String>> map = new ArrayList<String, ArrayList<String>>();
 ```
 
  An example of such a map in Python-ish notation might be:
@@ -77,26 +84,25 @@ map = { "the" : [' ', 'n', ' ', 'r', 's'],
       }
 ```
 
-Notice that in the list associated with the string `"the"`, there are **two** spaces and the list keyed by the string `"e t"`, there are **three** `'h'`s.
+Notice that in the list associated with the string `"the"`, there are **two** spaces and the list keyed by the string `"e t"`, there are **three** `'h'`s. Spaces are characters. And the lists of characters are not unique. Thus, if the key is `'q'`, the ArrayList of values will include lots and lots of instances of `'u'`.
 
-### Building the Markov Model (5 points)
+### Implementing Part 1: Building the language Model
 
-Go through the input text one character at a time. Each character is preceded by up to **N** characters. Make a string out of those preceding characters. Look in the map to see if there is already an entry for that string. If the string is already associated with a list in the map, then retrieve the list and add the current character to the list.
+Go through the input text one character at a time. Each character is preceded by up to **n** characters. Make a string out of those preceding characters. Look in the map to see if there is already an entry for that string. If the string is already associated with a list in the map, then retrieve the list and add the current character to the list.
 
 If the string isn't already a key in the map (i.e., it isn't associated with a list), then insert the string as a new key in the map. It should be associated with a new singleton list containing the current character.
 
-Note that, normally, the string of preceding characters will have exactly **N** characters, but near the front of the input text, the key string will have between 0 and **n** characters.  The string of preceding characters associated with the first character is the empty string `""`.
+Note that, normally, the string of preceding characters will have exactly **n** characters, but near the front of the input text, the key string will have between 0 and **n** characters.  The string of preceding characters associated with the first character is a dummy start-of-text sequence represented by the empty string `""`. This will be the first key entered into your map.
 
-What about at the end of the input text? I recommend the following: pretend that there is a special character with value `Main.SENTINAL` at the end of the text. Insert this special value into the relevant list in the map, and then stop. You'll see below how we'll use this special value when sampling the model.
+What about at the end of the input text? We will use the dummy end-of-text sequence "$$$" as the value for the very last key in the text. 
 
-### Sampling the Markov Model (5 points)
+More details are provided as comments in the code.
 
-Given the degree **N** and the Markov model created above, we can now generate the output text.  Maintain a `String` variable that contains the **N** most recently generated characters. (This string starts out empty.)  Look up that string in the map.  From the list associated with that string, randomly choose an element of the list. The chosen list element will either be a character or thespecial value `Main.SENTINAL`.  If the element is `Main.SENTINAL`, then stop. If the element is a real character, use it as the next character to generate for the output text. Append the character to the output text. Also append the character to the string of most recently generated **N** characters, making sure that the length of that string does not get larger than **N**. Repeat.  The process will eventually stop because we will eventually hit that special element `Main.SENTINAL`.
+### Implementing Part 2: Sampling the language Model (5 points)
 
-You should strongly consider defining the Markov model as an ADT.
+Given the degree **n** and the language model created above, we can now generate the output text.  Maintain a `String` variable that contains the **n** most recently generated characters. (This string starts out empty.)  Look up that string in the map.  From the list of observed subsequent characters associated with that string, randomly choose an element of the list. The chosen list element will either be a character or the special end-of-text value `$$$`.  If the element is a character that normally ends a sentence (you can limit yourselves to `"."`, `"!"`, or `"?"`) or the special end-of-text value `$$$`, then stop generatingn and print out your result. Otherwise, append the character to the output text. Also append the character to the string of most recently generated **n** characters, making sure that the length of that string does not get larger than **n**. Repeat. The process will eventually stop because we will eventually hit a punctuation mark that ends a sentence or "^^^".
 
-### Bells and Whistles
-
+## Extra Credit (up to 5 points total, which can be used to improve another problem set)
 
 + There's no way to know ahead of time how long the generated text will be. Add some way for the user to specify an approximate desired length for the output text.  Sample the model repeatedly (for a maximum number of times, perhaps) until you generate text that is approximately the right length.
 
@@ -106,7 +112,7 @@ You should strongly consider defining the Markov model as an ADT.
 
 ### What to Submit
 
-your repo should contain at least one sample input text along with sample output (.txt files) for degree 1 through degree 6.
+In addition to your code, your repo should contain at least one sample input text along with sample output (.txt files) for degree 1 through degree 5.
 
 ---
 
