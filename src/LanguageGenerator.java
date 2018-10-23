@@ -40,7 +40,18 @@ public class LanguageGenerator {
     * with the input text and your code.
 
     YOUR CODE ENDS HERE! */
-
+    ModelC model = new ModelC(n, myInputText);
+    String lang = "";
+    String next = "";
+    String nextSample = model.sample(next);
+    // System.out.println("HIHIHIHs");
+    while (nextSample != "." || nextSample != "!" || nextSample != "?" || nextSample != "^^^"){
+      lang = lang + nextSample;
+      next = next.substring(next.length() -  n);
+      nextSample = model.sample(next);
+    }
+    lang = lang + nextSample;
+    System.out.println(lang);
   }
 
 
