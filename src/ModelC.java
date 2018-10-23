@@ -54,6 +54,32 @@ public class ModelC implements Model {
     The value for that key will be the ending dummy sequence "$$$".
 
     */
+    String[] inputTextArray = inputText.split("");
+    ArrayList<String> addme = new ArrayList<String>();
+    addme.add(inputTextArray[0]);
+    map.put("", addme);
+    for (int i = 1; i < inputTextArray.length() - order; i++) {
+      String key = "";
+      ArrayList<String> a = new ArrayList<String>();
+      int counter = 0;
+      if (i < order) {
+        counter = 0;
+      } else {
+        counter = i - order;
+      }
+      for (int n = counter; n < i; n++){
+        key = key + inputTextArray[n];
+      }
+      a.add(i + 1);
+      if (containsKey(key)) {
+        ArrayList<String> b = map.get(key);
+        b.add(a);
+        map.put(key, b);
+      } else {
+        map.put(key, a);
+      }
+
+    }
 
 
   }
