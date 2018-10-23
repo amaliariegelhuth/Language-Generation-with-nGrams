@@ -58,7 +58,7 @@ public class ModelC implements Model {
     ArrayList<String> addme = new ArrayList<String>();
     addme.add(inputTextArray[0]);
     map.put("", addme);
-    for (int i = 1; i < inputTextArray.length() - order; i++) {
+    for (int i = 1; i < inputTextArray.length - order; i++) {
       String key = "";
       ArrayList<String> a = new ArrayList<String>();
       int counter = 0;
@@ -70,9 +70,16 @@ public class ModelC implements Model {
       for (int n = counter; n < i; n++){
         key = key + inputTextArray[n];
       }
-      a.add(i + 1);
+      if (i < inputTextArray.length - order - 1) {
+        a.add(inputTextArray[i + 1]);
+      }
+      else {
+        a.add("$$$");
+      }
+
       if (containsKey(key)) {
-        ArrayList<String> b = map.get(key);
+        ArrayList<String> b = new ArrayList<String>();
+        b.add(map.get(key));
         b.add(a);
         map.put(key, b);
       } else {
@@ -80,7 +87,6 @@ public class ModelC implements Model {
       }
 
     }
-
 
   }
   // YOUR CODE ENDS HERE
