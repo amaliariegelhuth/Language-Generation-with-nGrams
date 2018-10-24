@@ -1,3 +1,10 @@
+/*
+Amalia Riegelhuth
+amaliariegelhuth
+
+CSCI 1102 Computer Science 2
+
+*/
 /* This will be an implementation the Model Interface,
 partially implementation of Shannon's n-gram algorithm for
 modeling written language.*/
