@@ -46,7 +46,7 @@ public class LanguageGenerator {
     String nextSample = model.sample(next);
     int i = 0;
     // System.out.println("HIHIHIHs");
-    while (nextSample != ". " || nextSample != "! " || nextSample != "? " || nextSample != "^^^ "){
+    while (nextSample != ". " && nextSample != "!" && nextSample != "? " && nextSample != "$$$"){
 // while ( i < 5){
 
       lang = lang + nextSample;
@@ -55,12 +55,13 @@ public class LanguageGenerator {
         next = lang;
       }else{
       next = lang.substring(lang.length() -  n );
-      System.out.println("next:" + next);
+      // System.out.println("next:" + next);
       // System.out.println(lang.substring(1));
       // System.out.println(lang.substring(2));
       // System.out.println(lang.substring(3));
     }
       nextSample = model.sample(next);
+      System.out.println("next sample:" + nextSample);
         i++;
     }
     lang = lang + nextSample;

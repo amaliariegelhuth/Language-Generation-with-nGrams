@@ -1,7 +1,3 @@
-/*
-Amalia Riegelhuth
-
-*/
 /* This will be an implementation the Model Interface,
 partially implementation of Shannon's n-gram algorithm for
 modeling written language.*/
@@ -62,7 +58,7 @@ public class ModelC implements Model {
     ArrayList<String> addme = new ArrayList<String>();
     addme.add(inputTextArray[0]);
     map.put("", addme);
-    for (int i = 1; i < inputTextArray.length - order; i++) {
+    for (int i = 1; i < inputTextArray.length; i++) {
       String key = "";
       ArrayList<String> a = new ArrayList<String>();
       int counter = 0;
@@ -76,11 +72,7 @@ public class ModelC implements Model {
         // System.out.println("Key:" + key + "/");
       }
       if (i < inputTextArray.length - order - 1) {
-<<<<<<< HEAD
-        a.add(inputTextArray[i ]);
-=======
         a.add(inputTextArray[i]);
->>>>>>> 2b0d2a8de0ef99bda8b2d333e46438d223563b29
       }
       else {
         a.add("$$$");
@@ -96,7 +88,7 @@ public class ModelC implements Model {
       }
 
     }
-System.out.println(map.toString());
+// System.out.println(map.toString());
   }
   // YOUR CODE ENDS HERE
   // NOW GO WRITE THE CODE IN LanguageGenerator.java.
