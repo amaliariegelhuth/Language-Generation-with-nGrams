@@ -71,11 +71,7 @@ public class ModelC implements Model {
         key = key + inputTextArray[n];
         // System.out.println("Key:" + key + "/");
       }
-<<<<<<< HEAD
-      if (i < inputTextArray.length - order - 1) {
-=======
       if (i < inputTextArray.length - 1) {
->>>>>>> e496d7e97df733594d7c857ad7636e8e2d0bac52
         a.add(inputTextArray[i]);
       }
       else {
