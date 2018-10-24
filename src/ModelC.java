@@ -77,10 +77,10 @@ public class ModelC implements Model {
         a.add("$$$");
       }
 
-      if (containsKey(key)) {
+      if (map.containsKey(key)) {
         ArrayList<String> b = new ArrayList<String>();
-        b.add(map.get(key));
-        b.add(a);
+        b.addAll(map.get(key));
+        b.addAll(a);
         map.put(key, b);
       } else {
         map.put(key, a);
@@ -105,5 +105,9 @@ public class ModelC implements Model {
 
   private static int randomInt(int n) {
     return (int) (Math.random() * n);
+  }
+
+  public static void main(String[] args) {
+
   }
 }
