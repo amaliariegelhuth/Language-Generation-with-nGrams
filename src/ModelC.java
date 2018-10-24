@@ -1,3 +1,7 @@
+/*
+Amalia Riegelhuth
+
+*/
 /* This will be an implementation the Model Interface,
 partially implementation of Shannon's n-gram algorithm for
 modeling written language.*/
@@ -71,7 +75,7 @@ public class ModelC implements Model {
         key = key + inputTextArray[n];
       }
       if (i < inputTextArray.length - order - 1) {
-        a.add(inputTextArray[i + 1]);
+        a.add(inputTextArray[i]);
       }
       else {
         a.add("$$$");
