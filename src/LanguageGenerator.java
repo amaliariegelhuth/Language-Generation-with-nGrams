@@ -44,19 +44,28 @@ public class LanguageGenerator {
     String lang = "";
     String next = "";
     String nextSample = model.sample(next);
+    int i = 0;
     // System.out.println("HIHIHIHs");
-    // while (nextSample != "." || nextSample != "!" || nextSample != "?" || nextSample != "^^^"){
-    //   lang = lang + nextSample;
-    //   System.out.println(lang);
-    //   if (next.length() < n){
-    //     next = lang;
-    //   }else{
-    //   next = next.substring(next.length() -  n);
-  //   // }
-  //     nextSample = model.sample(next);
-  //   }
-  //   lang = lang + nextSample;
-  //   System.out.println(lang);
+    while (nextSample != ". " || nextSample != "! " || nextSample != "? " || nextSample != "^^^ "){
+// while ( i < 5){
+
+      lang = lang + nextSample;
+      System.out.println(lang);
+      if (next.length() < n){
+        next = lang;
+      }else{
+      next = lang.substring(lang.length() -  n );
+      System.out.println("next:" + next);
+      // System.out.println(lang.substring(1));
+      // System.out.println(lang.substring(2));
+      // System.out.println(lang.substring(3));
+    }
+      nextSample = model.sample(next);
+        i++;
+    }
+    lang = lang + nextSample;
+    System.out.println(lang);
+
   }
 
 
