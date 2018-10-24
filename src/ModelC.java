@@ -71,16 +71,15 @@ public class ModelC implements Model {
         key = key + inputTextArray[n];
       }
       if (i < inputTextArray.length - order - 1) {
-        a.add(inputTextArray[i + 1]);
+        a.add(inputTextArray[i ]);
       }
       else {
         a.add("$$$");
       }
-System.out.println(a.toString());
       if (map.containsKey(key)) {
         ArrayList<String> b = (ArrayList<String>) map.get(key).clone();
         // b.add(map.get(key));
-        b.add(inputTextArray[i + 1]);
+        b.add(inputTextArray[i]);
         map.put(key, b);
       } else {
         map.put(key, a);
