@@ -76,18 +76,18 @@ public class ModelC implements Model {
       else {
         a.add("$$$");
       }
-
-      if (containsKey(key)) {
-        ArrayList<String> b = new ArrayList<String>();
-        b.add(map.get(key));
-        b.add(a);
+System.out.println(a.toString());
+      if (map.containsKey(key)) {
+        ArrayList<String> b = (ArrayList<String>) map.get(key).clone();
+        // b.add(map.get(key));
+        b.add(inputTextArray[i + 1]);
         map.put(key, b);
       } else {
         map.put(key, a);
       }
 
     }
-
+System.out.println(map.toString());
   }
   // YOUR CODE ENDS HERE
   // NOW GO WRITE THE CODE IN LanguageGenerator.java.

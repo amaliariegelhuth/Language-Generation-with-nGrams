@@ -8,6 +8,6 @@ n-gram algorithm for modeling English text.
 */
 
 public interface Model {
-  Character sample(String key);
+  String sample(String key);
   String toString();
 }
