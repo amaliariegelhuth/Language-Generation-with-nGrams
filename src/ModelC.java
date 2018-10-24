@@ -71,7 +71,7 @@ public class ModelC implements Model {
         key = key + inputTextArray[n];
         // System.out.println("Key:" + key + "/");
       }
-      if (i < inputTextArray.length - order - 1) {
+      if (i < inputTextArray.length - 1) {
         a.add(inputTextArray[i]);
       }
       else {
@@ -88,7 +88,7 @@ public class ModelC implements Model {
       }
 
     }
-// System.out.println(map.toString());
+System.out.println(map.toString());
   }
   // YOUR CODE ENDS HERE
   // NOW GO WRITE THE CODE IN LanguageGenerator.java.
