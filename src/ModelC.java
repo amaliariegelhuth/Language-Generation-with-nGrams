@@ -69,6 +69,7 @@ public class ModelC implements Model {
       }
       for (int n = counter; n < i; n++){
         key = key + inputTextArray[n];
+        // System.out.println("Key:" + key + "/");
       }
       if (i < inputTextArray.length - order - 1) {
         a.add(inputTextArray[i ]);
