@@ -1,3 +1,11 @@
+/*
+Amalia Riegelhuth
+amaliariegelhuth
+
+CSCI 1102 Computer Science 2
+
+*/
+
 /* This will be an implementation the Model Interface,
 partially implementation of Shannon's n-gram algorithm for
 modeling written language.*/
@@ -55,40 +63,50 @@ public class ModelC implements Model {
 
     */
     String[] inputTextArray = inputText.split("");
+    // add the first value under key that is empty
     ArrayList<String> addme = new ArrayList<String>();
     addme.add(inputTextArray[0]);
     map.put("", addme);
+    // go through the input text
     for (int i = 1; i < inputTextArray.length; i++) {
+      // will hold key from imput text
       String key = "";
-      ArrayList<String> a = new ArrayList<String>();
+      ArrayList<String> addme1 = new ArrayList<String>();
       int counter = 0;
+      /* if the index is less than the order (the key will be less than
+      the order) then start the for loop at the 0 index otherwise start it
+      before the index by however much the order is */
       if (i < order) {
         counter = 0;
       } else {
         counter = i - order;
       }
+      // create the key
       for (int n = counter; n < i; n++){
         key = key + inputTextArray[n];
-        // System.out.println("Key:" + key + "/");
       }
+      // if its not the end, add the value to the array
+      // if it is the last element add the signal symbol "$$$"
       if (i < inputTextArray.length - 1) {
-        a.add(inputTextArray[i]);
-      }
-      else {
-        a.add("$$$");
-      }
-
-      if (map.containsKey(key)) {
-        ArrayList<String> b = new ArrayList<String>();
-        b.addAll(map.get(key));
-        b.addAll(a);
-        map.put(key, b);
+        addme1.add(inputTextArray[i]);
       } else {
-        map.put(key, a);
+        addme1.add("$$$");
+      }
+      /*
+      if the map already contains the key, add the value to the already
+      existing array
+      if it does not then create a new entry in the map
+      */
+      if (map.containsKey(key)) {
+        ArrayList<String> addme2 = new ArrayList<String>();
+        addme2.addAll(map.get(key));
+        addme2.addAll(addme1);
+        map.put(key, addme2);
+      } else {
+        map.put(key, addme1);
       }
 
     }
-System.out.println(map.toString());
   }
   // YOUR CODE ENDS HERE
   // NOW GO WRITE THE CODE IN LanguageGenerator.java.
