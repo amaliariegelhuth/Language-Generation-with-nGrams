@@ -48,29 +48,24 @@ public class LanguageGenerator {
 
     YOUR CODE ENDS HERE! */
     ModelC model = new ModelC(n, myInputText);
-    String lang = "";
-    String next = "";
-    String nextSample = model.sample(next);
-    while (!nextSample.equals(".") && !nextSample.equals("!") && !nextSample.equals("?") && !nextSample.equals("$$$")){
-
-      lang = lang + nextSample;
-      if (next.length() < n){
+    String lang = ""; //string to be built on and output
+    String next = ""; //the next to characters to take a sample of
+    String nextSample = model.sample(next);//the next sample to be added to the output string
+    while (!nextSample.equals(".") && !nextSample.equals("!") && !nextSample.equals("?") && !nextSample.equals("$$$")){ //check to make sure the next character sampled is not punctuation or end of file
+      lang = lang + nextSample; //add the next sampled character onto the output string
+      if (next.length() < n){ //if the next string to be sampled is shorter than the order, keep using the output string as next
         next = lang;
       }else{
-      next = lang.substring(lang.length() -  n );
-      // System.out.println("next:" + next);
-      // System.out.println(lang.substring(1));
-      // System.out.println(lang.substring(2));
-      // System.out.println(lang.substring(3));
+      next = lang.substring(lang.length() -  n ); //if not, find the new next by taking the last n characters from the output string
     }
-      nextSample = model.sample(next);
+      nextSample = model.sample(next); //get the next sample using the sample method on next
 
     }
-    if (nextSample != "$$$"){
+    if (nextSample != "$$$"){ //if the next sample which ended the loop is end of text, don't put it on the end, if it's puctuation, add it to the end
       lang = lang + nextSample;
     }
 
-    System.out.println(lang);
+    System.out.println(lang); //print out the output string
 
   }
 
