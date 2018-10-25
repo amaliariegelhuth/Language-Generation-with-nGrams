@@ -1,0 +1,20 @@
+girlswhocode36:src Isabe$ java LanguageGenerator testfile.txt 1
+This is line 1. This is line 2. This is not line 4.
+Output string:
+This lis 4.
+girlswhocode36:src Isabe$ java LanguageGenerator testfile.txt 2
+This is line 1. This is line 2. This is not line 4.
+Output string:
+This is line 4.
+girlswhocode36:src Isabe$ java LanguageGenerator testfile.txt 3
+This is line 1. This is line 2. This is not line 4.
+Output string:
+This is line 1.
+girlswhocode36:src Isabe$ java LanguageGenerator testfile.txt 4
+This is line 1. This is line 2. This is not line 4.
+Output string:
+This is line 2.
+girlswhocode36:src Isabe$ java LanguageGenerator testfile.txt 5
+This is line 1. This is line 2. This is not line 4.
+Output string:
+This is line 4.

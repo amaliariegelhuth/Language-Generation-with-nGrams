@@ -64,7 +64,7 @@ public class LanguageGenerator {
     if (nextSample != "$$$"){ //if the next sample which ended the loop is end of text, don't put it on the end, if it's puctuation, add it to the end
       lang = lang + nextSample;
     }
-
+    System.out.println("Output string:");
     System.out.println(lang); //print out the output string
 
   }
