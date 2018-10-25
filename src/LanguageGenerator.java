@@ -47,7 +47,6 @@ public class LanguageGenerator {
     while (!nextSample.equals(".") && !nextSample.equals("!") && !nextSample.equals("?") && !nextSample.equals("$$$")){
 
       lang = lang + nextSample;
-      System.out.println(lang);
       if (next.length() < n){
         next = lang;
       }else{
@@ -58,7 +57,6 @@ public class LanguageGenerator {
       // System.out.println(lang.substring(3));
     }
       nextSample = model.sample(next);
-      System.out.println("next sample:" + nextSample);
 
     }
     if (nextSample != "$$$"){
