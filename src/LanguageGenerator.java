@@ -2,6 +2,9 @@
 Amalia Riegelhuth
 amaliariegelhuth
 
+Isabel Bulman
+ibulman
+
 CSCI 1102 Computer Science 2
 
 */
